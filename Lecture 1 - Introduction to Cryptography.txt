@@ -1,0 +1,212 @@
+This lecture will involve the basics behind cryptography. For examples what it's about and stuff
+
+This is only notes and will be full of spelling mistakes for sure as I listen in on the lecture
+
+- 
+
+Topics in the lecture
+
+    - Classification
+    - Basics/Setup
+    - Substitue Cipher
+    - Attacks
+
+Nothing mathamatical here; more of an introduction about the concepts and the workings behind cryptography.
+
+1: Classification
+
+        Modern examples of cryptography
+            - GNU PG: PC/Laptop encrypton
+            - TruCrypt
+            - Hard drive encryption
+            - Secure Shell: SSH, remote file transfer over a secure network
+            - (Plug-in) for Thunderbird
+            - S-MIME Email encryption
+
+            - Cell phone
+            - HDCP-Multimedia protection
+            - Bank cards
+            - Virtual private network
+            - ePassport: Passport with the electronic chips on that have encryption protocols on them
+            - Online banking
+
+            Cell phones, Bank cards are all examples of devices that require encryption but aren't on a PC
+            Most GSM mobile phones have crypto on-board
+
+            - iPod/iTunes - (DRM: Digital rights management)
+            - Kindle/eBook
+
+            All these use crypto to secure the content to stop redistribution and so on.
+
+    Cryptology:
+        Cryptology splits into two branches:
+
+        - Cryptography: The good guys
+        - Cryptoanalysis: The bad guys
+
+        Cryptoanalysis will try and break Cryptography
+
+        ------------------------------------------------------------
+
+        Cryptography:
+            Splits into three main parts
+
+            - Symmetric algorithms
+            - Asymetric algorights (e.g public key crypto)
+            - Protocols
+
+    Security is essentially a bigger picture and simply involves cryptography. For example, we have other areas of
+    security such as firewalling and so on. Cryptography is just a small portion of it.
+
+2: Basics/Setup
+
+    Setup for symmetric cryptography:
+        - Start with a simple problem (Mainly communication over insecure channel)
+
+            - 2 Parties
+
+                - A: Alice
+                - B: Bob
+                
+                - For this example, we will use an email exchange. In the middle is a channel that is open
+                (insecure)
+                - Transmission media (channel) examples:
+                    - Internet
+                    - Airwaves (GSM, WiFi...etc)
+
+                - Alice sends the email to Bob. The problem is, Oscar might be listening in the middle
+
+                    - Alice --Email--> Bob 
+                    
+                                Oscar 
+                                V
+                    - Alice --Email--> Bob
+
+                - To overcome this, we could send the message personally, but it is slow. This is why we use 
+                cryptography
+
+                - Encryption is used from the source
+
+                X: Source
+                Y: Encrypted message
+                [e] = Encryption function
+                [d] = Decryption function
+            
+                X -----> [e] -----> Y -----> Insecure channel -----> Y -----> [d] -----> X
+
+                Should encryption/decryption be public?:
+
+                    - Yes: Because they do not have the key to decrypt anyway
+                    - No: People can read how the encryption process works and decryption
+
+                    - In 2000 BC, there were hyrogliphs that where used to communicate secretly.
+                    - People believe that you can have a more secure system if you keep the encryption methods secret.
+
+                    - Using public encryption functions will ensure the encryption is secure
+                        - When someone creates an encryption algorithm, the person who made it will think it is secure.
+                        However, most of the time, they are very insecure. Keeping the algorithm public will allow 
+                        many people to access, check and make the algorithm more secure.
+
+                        - The goal is that Cryptoanalysis people can try and break it, if so it needs improving. If not, 
+                        the algorithm that can be trusted.
+
+                In pratice: Never used an untested crypto algorithm.
+
+                - From this function, there is a key missing from the encryption algorithm.
+
+                X -----> [e w/key] -----> Y -----> Insecure channel -----> Y -----> [d w/key] -----> X
+
+                Now both ends can use the key to decrypt the message and anyone snopping on the insecure channel
+                will only see a bunch of characters.
+
+                ----
+
+                We could use a brute force attack depending on how many keys there are to break the encryption
+                and find out the key
+
+                X = Plain text
+                Y = Cipher text
+                E = Encryption function
+                D = Decryption function
+                K = key
+
+                |K| = Keyspace (Number of keys)
+
+                - The problem is now, the key has to be shared
+                    - If the key is sent over an insecure channel, the snooper can get it...
+
+                    OR
+
+                    - We can send the key over a secure channel (Letter in the mail, one time keys etc...)
+
+                    Kerckhoff's Principle [1883]
+
+                        - Kerckhoff said:
+                            - "A crypto system should be secure even if the attacker (snooper) knows all the 
+                            details about the system, WITH THE EXCEPTION OF THE SECRET KEY"
+
+                            - Remark: Kerckhoff's principe is counterintuitive. It sounds stupid, but it works better
+                            than keeping everything secure.
+
+
+3: Substition Cipher:
+
+    What is it?
+        - Historical Cipher - Old and stupid ciphers. Operated on letters
+        - Replaces every plain text letter with a fixed ciphertext letter
+
+    Example:
+
+        - A = l
+        - B = d
+        - C = w
+
+        ABBA = lddl - Of course this is not secure
+
+    How can we attack the cipher?
+        1: Brute force attack/Exhausitve key search = Try all possible keys
+
+            If using all the letters, we would have 2^88 possibilities
+
+            Overall, key space is too large and we cannot use an exhaustive key search
+
+        2: Letter frequency analysis
+
+            - We can see what frequencies of letters there are
+            - In the English language, e is the most common letter. 13% of all letters in typical English text
+            are 'e'
+
+            - We can count how frequent each letter is. For example is there's a Q a lot of the time, it most
+            likely is an E as it is the most common letter in English.
+
+            - From this, we know we have a fixed assignment table. This type of attack works as we know that
+            identical plaintext letters map to identical ciphertext letters.
+
+4: Classification of attacks
+
+    - There are often many possible attack approaches (Attack vectors) 
+
+    - Cryptoanalysis
+        - Classical Cryptoanalysis
+            - Brute force/Exhausitve key attack
+            - Analytical attacks
+        
+        - Social engineering
+            - "Hello I'm your systems admin. I need the key for this urgently" Works in big companies when someone
+            doesn't know a lot of people in that company
+
+        - Implementation attacks
+            - Look at the physical hardware on a bank card for example
+
+            - We can use osciliscopes (wtf is that spelling) And check the power consumption to see if it has something
+            to do with the algorithm
+                - AKA "Side-channel analysis"
+
+            - We can do this with a laptop as well. Out of the timing curves, we can compute a key
+
+
+Conclusion: 
+
+For an attacker, it is good to use one of these systems to attack a system
+
+As a designer, we need to design against every single attack their is
