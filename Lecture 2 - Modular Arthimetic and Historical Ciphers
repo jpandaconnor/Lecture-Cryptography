@@ -1,0 +1,123 @@
+Today:
+
+- Modular algorithm
+- Shift ciphers
+- 
+
+
+1: Modular arithmetic
+
+    Goal: Computation in Finite Sets
+
+    Finite: "limited in size or extent: "
+    Finite Sets: "In mathematics, a finite set is a set that has a finite number of elements"
+
+    Example for a finite set in everyday life:
+        For example, if I said meet in 20 hours we wouldn't 12+20 = 32 hours. We wouldn't meet at 32 hours, instead we would
+        meet at 8 in the morning.
+
+        The clock is finite (Limited in size)
+
+        Finite sets can be defined as a circle for example. Like a clock
+
+        Overall:
+            - Going to the bakery is not finite - If you want 12 rolls and 20, we will get 32
+            - If I am going to meet someone in 20 hours, we will end up meeting at 8 in the morning
+                as a clock is infinite.
+
+        Modular Operator
+            - Basically how many times does it divide and give us the remainder
+
+            Definition:
+                (HERE COMES THE NOT SO NICE STUFF :CCCC)
+
+                | = Devices
+                Triple Equals = Equivalant to
+
+                - Let A,R,M Element of Z AND m > 0 (M is positive)
+                    Then we Write
+                        - A -= r modM
+
+                        IF m devides (m - r)
+                            M | (a - r)
+
+            
+            Examples:
+
+                (What is r?)
+
+                a = 13, m = 9, r = ?
+
+                Take 13 and divide. How often does the modulus divice into 13
+
+                13 / 9 = 1
+                    Modulus -= 4 mod 9
+
+                a - r = 13
+                13 - 4 = 9
+
+                9 Is divisable by 9
+
+    
+    Computation of the remainder:
+
+        - Given: a,m eZ
+            a = BLANK m
+
+            How often does a fit into m
+
+            q = Quotiant!
+
+            a = qm + r
+
+            Example:
+
+                a = 42
+                m (modulus) = 9
+
+                42 = BLANK  9
+
+                42 = 49 + 6 += 6 (Equivalant to 6)
+
+
+                BUT ALSO
+
+                42 = 3 . 9 + 15 => += 15 - THE REMAINDER IS NOT UNIQUE
+
+        Overall: The remainder is not unique
+
+    Equivalence classes:
+
+        - a = 12, m = 5
+
+            12 = 2 mod 5
+
+            OR
+            
+            12 -= 7 
+
+            TO CHECK THIS IS EQUIV
+
+                12 -= 7
+
+                5 | (12 - 7)
+                5 | 5
+
+                    = 1
+
+        12 -= -3
+
+            CHECK 5|(12 - (-3)) =
+                5 | 15
+
+                    = 3
+
+        DEFINE THE SET
+
+            { -3, 2, 7} CREMENTS BY 5. Infinite Set
+
+            This forms an equivalence class. module 5. All members (numbers) of the class behave 
+                equivalent modulous 5
+
+        
+         
